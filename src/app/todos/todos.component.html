@@ -1,3 +1,4 @@
+<div class="alert alert-success" *ngIf="message">{{message}}</div>
 <table class="table m-4">
   <thead>
     <tr>
@@ -5,6 +6,8 @@
       <th>description</th>
       <th>target date</th>
       <th>done?</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody class="m-4">
@@ -12,7 +15,10 @@
       <td>{{todo.id}}</td>
       <td>{{todo.description }}</td>
       <td>{{todo.targetDate | date}}</td>
-      <td>{{todo.done}}</td>
+      <td *ngIf="todo.done else elseBlock">✔</td>
+      <ng-template #elseBlock><td>❌</td></ng-template>
+      <td><button class="btn btn-info">Update</button></td>
+      <td><button (click)="deleteTodo(todo.id)" class="btn btn-danger ">Delete</button></td>
     </tr>
   </tbody> 
 </table>

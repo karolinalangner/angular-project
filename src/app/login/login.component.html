@@ -1,8 +1,10 @@
-<small *ngIf="invalidLogin">Invalid Login</small>
-<p>
-  Login: <input type="text" name="username" value="{{username}}" [(ngModel)]="username">
-</p>
-<p>
-  Password: <input type="password" [(ngModel)]="password">
-</p>
-<button (click)=handleLogin()>Login</button>
+<div class="m-auto d-flex align-items-center flex-column">
+  <small *ngIf="invalidLogin" class="form-text text-muted my-2">Invalid Login</small>
+  <div class="form-group">
+    <input type="text" class="form-control" name="username" value="{{username}}" [(ngModel)]="username">
+  </div>
+  <div class="form-group">
+    <input type="password" [(ngModel)]="password" class="form-control" label="password">
+  </div>
+  <button class="btn btn-info" (click)=handleLogin()>Login</button>
+</div>

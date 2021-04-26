@@ -1,4 +1,11 @@
 <p>
   welcome {{name}}!
 </p>
-<button class="btn btn-primary" (click)=goToTodos()>See your To-do's</button>
+
+<button class="m-2 btn btn-primary" (click)=getWelcomeMessageWithParameter()>Get personalised welcome page</button>
+<br>
+<button class="m-2 btn btn-primary" (click)=goToTodos()>See your To-do's</button>
+
+<div *ngIf="welcomeMessageFromService">
+  <p>{{welcomeMessageFromService}}</p>
+</div>
