@@ -1,0 +1,15 @@
+.todos-list {
+   display: flex;
+   flex-direction: column;
+}
+
+.alert {
+    text-align: center;
+    width: 50%;
+    margin: auto;
+}
+
+table {
+    width: 70%;
+    margin:auto;
+}

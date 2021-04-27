@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TodoDataService } from '../service/data/todo-data.service';
 
 export class Todo {
@@ -19,10 +20,17 @@ export class TodosComponent implements OnInit {
   todos: Todo[]
   message: string
 
-  constructor(private todoService: TodoDataService, private router:Router) { }
+  constructor(private todoService: TodoDataService, private router:Router, private route:ActivatedRoute) { }
 
   ngOnInit() {
     this.refreshTodos();
+    this.message = this.route.snapshot.queryParamMap.get('message');
+  }
+
+  haveTodos() {
+    if (this.todos.length != 0){
+      return true
+    }
   }
 
   refreshTodos(){
@@ -42,5 +50,13 @@ export class TodosComponent implements OnInit {
         this.refreshTodos()
       }
     );
+    }
+
+    handleUpdate(id){
+      this.router.navigate(['todos', id])
+    }
+
+    addTodo(id){
+      this.router.navigate(['todos', -1])
     }
 }
