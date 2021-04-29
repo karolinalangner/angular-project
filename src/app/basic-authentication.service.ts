@@ -31,7 +31,6 @@ export class BasicAuthenticationService {
     //console.log("Execute Hello World Bean Service")
   }
 
-
   executeAuthenticationService(username, password) {
     
     let basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
