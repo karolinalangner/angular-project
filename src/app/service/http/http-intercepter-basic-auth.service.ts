@@ -1,36 +1,32 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { BasicAuthenticationService } from 'src/app/basic-authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HttpIntercepterBasicAuthService implements HttpInterceptor {
+export class HttpIntercepterBasicAuthService implements HttpInterceptor{
 
-  constructor(private basicAuthenticationService: BasicAuthenticationService) { }
+  constructor(
+    private basicAuthenticationService : BasicAuthenticationService
+  ) { }
 
-  intercept(request: HttpRequest<any>, next: HttpHandler) {
-    // let username = 'karolina'
-    // let password = '123'
-    // let basicAuthHttpHeaderString = ('Basic ' + window.btoa(`${username}:${password}`))
+  intercept(request: HttpRequest<any>, next: HttpHandler){
+    // let username = 'in28minutes'
+    // let password = 'dummy'
+    //let basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
+    let basicAuthHeaderString = this.basicAuthenticationService.getAuthenticatedToken();
+    let username = this.basicAuthenticationService.getAuthenticatedUser()
 
-    let basicAuthHttpHeaderString = this.basicAuthenticationService.getAuthenticatedToken();
-    console.log('basic from intercept method:'+ basicAuthHttpHeaderString)
-    let username = this.basicAuthenticationService.getAuthenticatedUser();
-    console.log('username from intercept method:' + username)
-    
-    if (basicAuthHttpHeaderString && username) {
-
-      request = request.clone(
-        {
-          setHeaders: {
-            Authorization: basicAuthHttpHeaderString
+    if(basicAuthHeaderString && username) { 
+      request = request.clone({
+        setHeaders : {
+            Authorization : basicAuthHeaderString
           }
-        }
-      )
-      return next.handle(request);
+        }) 
     }
-
+    return next.handle(request);
   }
+
+
 }

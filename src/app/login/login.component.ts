@@ -9,8 +9,8 @@ import { HardcodedAuthenticationService } from '../hardcoded-authentication.serv
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  username = 'karolina'
-  password = '123'
+  username = 'your username'
+  password = ''
   invalidLogin = false
 
   constructor(private router: Router, 
@@ -32,15 +32,15 @@ export class LoginComponent implements OnInit {
   handleBasicAuthLogin() {
     this.basicAuthenticationService.executeAuthenticationService(this.username, this.password)
         .subscribe(
-      data=> {
-        console.log(data)
-        this.router.navigate(['welcome', this.username])
-        this.invalidLogin = false
-      },
-      error=> {
-        console.log(error)
-        this.invalidLogin = true
-      }
+          data=> {
+            console.log(data)
+            this.router.navigate(['welcome', this.username])
+            this.invalidLogin = false
+          },
+          error=> {
+            console.log(error)
+            this.invalidLogin = true
+          }
     )
   }
 
